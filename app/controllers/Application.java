@@ -347,7 +347,12 @@ public class Application extends Controller {
     public static void createGtfs(List<String> agencySelect, Long calendarFrom, Long calendarTo) {
         // reasonable defaults: now to 2 months from now (more or less)
     	String bucketName = "arup-t3a-gtfs-staging";
-        AmazonS3 s3client = new AmazonS3Client(new ProfileCredentialsProvider());
+        //AmazonS3 s3client = new AmazonS3Client(new ProfileCredentialsProvider());
+
+        String accessKey = Play.configuration.getProperty("aws.access.key");
+        String secretKey = Play.configuration.getProperty("aws.secret.key");
+        AWSCredentials awsCredentials = new BasicAWSCredentials(accessKey, secretKey);
+        AmazonS3 s3client = new AmazonS3Client(awsCredentials);
 
     	LocalDate startDate;
     	LocalDate endDate;
@@ -367,7 +372,7 @@ public class Application extends Controller {
         new ProcessGtfsSnapshotExport(agencySelect, out, startDate, endDate, false).run();
         
         s3client.putObject(new PutObjectRequest(bucketName,out.getName(),out));
-        
+
         redirect(Play.configuration.getProperty("application.appBase") + "/public/data/"  + out.getName());
     }
     
