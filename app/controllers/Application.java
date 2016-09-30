@@ -346,7 +346,7 @@ public class Application extends Controller {
      */
     public static void createGtfs(List<String> agencySelect, Long calendarFrom, Long calendarTo) {
         // reasonable defaults: now to 2 months from now (more or less)
-    	String bucketName = "arup-t3a-gtfs-staging";
+    	String bucketName = Play.configuration.getProperty("aws.bucket.key");
         //AmazonS3 s3client = new AmazonS3Client(new ProfileCredentialsProvider());
 
         String accessKey = Play.configuration.getProperty("aws.access.key");

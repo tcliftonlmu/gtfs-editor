@@ -3,6 +3,7 @@
 
 aws.access.key=${AWS_ACCESS_KEY}
 aws.secret.key=${AWS_SECRET_KEY}
+aws.bucket.key=${AWS_BUCKET_NAME}
 
 # if installing as a stand-alone app this should be "public/data" if installed as tomcat application this should be the absolute path to public/data, e.g.
 # /usr/local/Cellar/tomcat/7.0.47/libexec/webapps/gtfs-editor/WEB-INF/application/public/data/
